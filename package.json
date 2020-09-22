@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
+    "jest:coverage": "jest --coverage --coverageReporters=\"json-summary\"",
     "cypress": "yarn start & cypress run",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open"
@@ -31,7 +32,17 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn jest"
+      "pre-push": "yarn jest:coverage && yarn jest-coverage-ratchet"
+    }
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 50,
+        "lines": 50,
+        "statements": 50
+      }
     }
   }
 }
